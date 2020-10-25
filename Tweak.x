@@ -1,3 +1,9 @@
+@interface SBApplication : NSObject
+@property (nonatomic,readonly) NSString * bundleIdentifier;
+@property (nonatomic,readonly) NSString * iconIdentifier;
+@property (nonatomic,readonly) NSString * displayName;
+@end
+
 // Thank you DGh0st and the iphonedevwiki
 %hook SpringBoard
 - (void)frontDisplayDidChange:(id)arg {
