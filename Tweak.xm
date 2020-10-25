@@ -52,18 +52,29 @@
 -(id)initWithFrame:(CGRect)arg1 delegate:(id)arg2 {
     %orig;
     NSLog(@"lasttime: initWithFrame");
+
 	SBFluidSwitcherItemContainerHeaderItem *firstItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_firstItem");
     [firstItem setTitleText:[firstItem.titleText stringByAppendingString:@"timestamp1"]];
+
 	SBFluidSwitcherItemContainerHeaderItem *secondItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_secondItem");
     [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp2"]];
+
+    [self setValue:firstItem forKey:@"_firstItem"];
+    [self setValue:secondItem forKey:@"_secondItem"];
+
     return self;
 }
 -(void)_createIconAndTitleSubviews {
     NSLog(@"lasttime: _createIconAndTitleSubviews");
     %orig;
+
 	SBFluidSwitcherItemContainerHeaderItem *firstItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_firstItem");
     [firstItem setTitleText:[firstItem.titleText stringByAppendingString:@"timestamp1"]];
+
 	SBFluidSwitcherItemContainerHeaderItem *secondItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_secondItem");
     [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp2"]];
+
+    [self setValue:firstItem forKey:@"_firstItem"];
+    [self setValue:secondItem forKey:@"_secondItem"];
 }
 %end
