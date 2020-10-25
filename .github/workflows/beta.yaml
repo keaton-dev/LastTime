@@ -26,6 +26,13 @@ jobs:
       run: |
         brew install make
         PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+    - name: Cache NPM dependencies
+      uses: actions/cache@v1
+      with:
+        path: theos
+        key: ${{ runner.OS }}-theos-cache-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.OS }}-theos-cache-
     - name: Build Package
       id: build_package
       run: |
