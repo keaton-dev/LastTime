@@ -33,15 +33,15 @@
 }
 %end
 
-@interface SBFluidSwitcherIconImageContainerView : UIView
+@interface SBFluidSwitcherItemContainerHeaderItem : NSObject
+@property (nonatomic,copy) NSString * titleText;
+@property (nonatomic,copy) NSString * subtitleText;
 @end
 
 // view responsible for containing app icon and label
 @interface SBFluidSwitcherItemContainerHeaderView : UIView {
-	SBFluidSwitcherIconImageContainerView* _firstIconImageView;
-	UILabel* _firstIconTitle;
-	SBFluidSwitcherIconImageContainerView* _secondIconImageView;
-	UILabel* _secondIconTitle;
+	SBFluidSwitcherItemContainerHeaderItem* _firstItem;
+	SBFluidSwitcherItemContainerHeaderItem* _secondItem;
 }
 -(id)initWithFrame:(CGRect)arg1 delegate:(id)arg2;
 -(void)_updateIconsAndTitles;
@@ -51,18 +51,18 @@
 %hook SBFluidSwitcherItemContainerHeaderView
 -(id)initWithFrame:(CGRect)arg1 delegate:(id)arg2 {
     %orig;
-	UILabel *firstIconTitle = MSHookIvar<UILabel *>(self, "_firstIconTitle");
-    firstIconTitle.text = [firstIconTitle.text stringByAppendingString:@"timestamp1"];
-	UILabel *secondIconTitle = MSHookIvar<UILabel *>(self, "_secondIconTitle");
-    secondIconTitle.text = [secondIconTitle.text stringByAppendingString:@"timestamp2"];
+	SBFluidSwitcherItemContainerHeaderItem *firstItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_firstItem");
+    [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp1"]];
+	SBFluidSwitcherItemContainerHeaderItem *secondItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_secondItem");
+    [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp2"]];
     return self;
 }
 -(void)_createIconAndTitleSubviews {
     NSLog(@"lasttime: _createIconAndTitleSubviews");
     %orig;
-	UILabel *firstIconTitle = MSHookIvar<UILabel *>(self, "_firstIconTitle");
-    firstIconTitle.text = [firstIconTitle.text stringByAppendingString:@"timestamp1"];
-	UILabel *secondIconTitle = MSHookIvar<UILabel *>(self, "_secondIconTitle");
-    secondIconTitle.text = [secondIconTitle.text stringByAppendingString:@"timestamp2"];
+	SBFluidSwitcherItemContainerHeaderItem *firstItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_firstItem");
+    [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp1"]];
+	SBFluidSwitcherItemContainerHeaderItem *secondItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_secondItem");
+    [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp2"]];
 }
 %end
