@@ -52,7 +52,7 @@
 -(id)initWithFrame:(CGRect)arg1 delegate:(id)arg2 {
     %orig;
 	SBFluidSwitcherItemContainerHeaderItem *firstItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_firstItem");
-    [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp1"]];
+    [firstItem setTitleText:[firstItem.titleText stringByAppendingString:@"timestamp1"]];
 	SBFluidSwitcherItemContainerHeaderItem *secondItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_secondItem");
     [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp2"]];
     return self;
@@ -61,7 +61,7 @@
     NSLog(@"lasttime: _createIconAndTitleSubviews");
     %orig;
 	SBFluidSwitcherItemContainerHeaderItem *firstItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_firstItem");
-    [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp1"]];
+    [firstItem setTitleText:[firstItem.titleText stringByAppendingString:@"timestamp1"]];
 	SBFluidSwitcherItemContainerHeaderItem *secondItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_secondItem");
     [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp2"]];
 }

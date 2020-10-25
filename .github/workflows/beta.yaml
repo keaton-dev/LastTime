@@ -22,7 +22,6 @@ jobs:
         path: |
           theos
           /usr/local/Cellar/
-          /usr/local/opt/
         key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-${{ env.cache-name }}-
