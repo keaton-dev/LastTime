@@ -31,7 +31,7 @@ jobs:
     - name: Link ldid
       if: steps.cache-deps.outputs.cache-hit == 'true'
       run: |
-        brew install libplist
+        brew link libplist
         brew link ldid
     - name: Setup Theos
       if: steps.cache-deps.outputs.cache-hit != 'true'
