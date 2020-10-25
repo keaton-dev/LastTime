@@ -22,11 +22,10 @@ jobs:
           theos
           /usr/local/Cellar/
           /usr/local/opt/
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-cache-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+          ${{ runner.os }}-cache-${{ env.cache-name }}-
+          ${{ runner.os }}-cache-
     - name: Install Dependencies
       if: steps.cache-primes.outputs.cache-hit != 'true'
       run: brew install ldid xz
