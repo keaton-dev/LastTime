@@ -47,7 +47,10 @@
 
 %hook SBFluidSwitcherItemContainerHeaderView
 -(void)_createIconAndTitleSubviews {
+    %orig;
+	UILabel *firstIconTitle = MSHookIvar<UILabel *>(self, "_firstIconTitle");
+    firstIconTitle.text = [firstIconTitle.text stringByAppendingString:@"timestamp1"];
 	UILabel *secondIconTitle = MSHookIvar<UILabel *>(self, "_secondIconTitle");
-    secondIconTitle.text = [secondIconTitle.text stringByAppendingString:@"timestamp"];
+    secondIconTitle.text = [secondIconTitle.text stringByAppendingString:@"timestamp2"];
 }
 %end
