@@ -30,7 +30,9 @@ jobs:
       run: brew install ldid xz
     - name: Link ldid
       if: steps.cache-deps.outputs.cache-hit == 'true'
-      run: brew link ldid
+      run: |
+      brew install libplist
+      brew link ldid
     - name: Setup Theos
       if: steps.cache-deps.outputs.cache-hit != 'true'
       uses: actions/checkout@master
