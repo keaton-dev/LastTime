@@ -70,7 +70,7 @@
     [self setValue:secondItem forKey:@"_secondItem"];
 
 	UILabel *firstTitleLabel = MSHookIvar<UILabel *>(self, "_firstTitleLabel");
-    firstIconTitle.text = [firstIconTitle.text stringByAppendingString:@"timestamp3"];
+    firstTitleLabel.text = [firstTitleLabel.text stringByAppendingString:@"timestamp3"];
 	UILabel *secondTitleLabel = MSHookIvar<UILabel *>(self, "_secondTitleLabel");
     secondTitleLabel.text = [secondTitleLabel.text stringByAppendingString:@"timestamp4"];
 
