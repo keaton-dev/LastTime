@@ -14,6 +14,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - name:  Cache theos dependencies
+      id: cache-deps
       uses: actions/cache@v2
       env:
         cache-name: cache-theos-dependencies
@@ -22,15 +23,14 @@ jobs:
           theos
           /usr/local/Cellar/
           /usr/local/opt/
-        key: ${{ runner.os }}-cache-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-cache-${{ env.cache-name }}-
-          ${{ runner.os }}-cache-
+          ${{ runner.os }}-${{ env.cache-name }}-
     - name: Install Dependencies
-      if: steps.cache-primes.outputs.cache-hit != 'true'
+      if: steps.cache-deps.outputs.cache-hit != 'true'
       run: brew install ldid xz
     - name: Setup Theos
-      if: steps.cache-primes.outputs.cache-hit != 'true'
+      if: steps.cache-deps.outputs.cache-hit != 'true'
       uses: actions/checkout@master
       with:
         repository: lgariv/theos
@@ -38,7 +38,7 @@ jobs:
         path: theos
         submodules: recursive
     - name: Update Make
-      if: steps.cache-primes.outputs.cache-hit != 'true'
+      if: steps.cache-deps.outputs.cache-hit != 'true'
       run: |
         brew install make
         PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
