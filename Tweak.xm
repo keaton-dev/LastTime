@@ -38,6 +38,10 @@
 @property (nonatomic,copy) NSString * subtitleText;
 @end
 
+@interface BSUIEmojiLabelView : UIView
+@property (nonatomic,copy) NSString * text; 
+@end
+
 // view responsible for containing app icon and label
 @interface SBFluidSwitcherItemContainerHeaderView : UIView {
 	SBFluidSwitcherItemContainerHeaderItem* _firstItem;
@@ -54,18 +58,33 @@
 
 %hook SBFluidSwitcherItemContainerHeaderView
 -(id)initWithFrame:(CGRect)arg1 {
+    %orig;
     NSLog(@"lasttime: initWithFrame");
 
 	SBFluidSwitcherItemContainerHeaderItem *firstItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_firstItem");
     [firstItem setTitleText:[firstItem.titleText stringByAppendingString:@"timestamp1"]];
-
 	SBFluidSwitcherItemContainerHeaderItem *secondItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_secondItem");
     [secondItem setTitleText:[secondItem.titleText stringByAppendingString:@"timestamp2"]];
 
     [self setValue:firstItem forKey:@"_firstItem"];
     [self setValue:secondItem forKey:@"_secondItem"];
 
-    %orig;
+	UILabel *firstTitleLabel = MSHookIvar<UILabel *>(self, "_firstTitleLabel");
+    firstIconTitle.text = [firstIconTitle.text stringByAppendingString:@"timestamp3"];
+	UILabel *secondTitleLabel = MSHookIvar<UILabel *>(self, "_secondTitleLabel");
+    secondTitleLabel.text = [secondTitleLabel.text stringByAppendingString:@"timestamp4"];
+
+    [self setValue:firstTitleLabel forKey:@"_firstTitleLabel"];
+    [self setValue:secondTitleLabel forKey:@"_secondTitleLabel"];
+
+	BSUIEmojiLabelView *firstSubtitleLabelView = MSHookIvar<BSUIEmojiLabelView *>(self, "_firstSubtitleLabelView");
+    [firstSubtitleLabelView setText:[firstSubtitleLabelView stringByAppendingString:@"timestamp5"]];
+	BSUIEmojiLabelView *secondSubtitleLabelView = MSHookIvar<BSUIEmojiLabelView *>(self, "_secondSubtitleLabelView");
+    [secondSubtitleLabelView setText:[secondSubtitleLabelView stringByAppendingString:@"timestamp6"]];
+
+    [self setValue:firstSubtitleLabelView forKey:@"_firstSubtitleLabelView"];
+    [self setValue:secondSubtitleLabelView forKey:@"_secondSubtitleLabelView"];
+
     return self;
 }
 %end
