@@ -51,6 +51,7 @@
 %hook SBFluidSwitcherItemContainerHeaderView
 -(id)initWithFrame:(CGRect)arg1 delegate:(id)arg2 {
     %orig;
+    NSLog(@"lasttime: initWithFrame");
 	SBFluidSwitcherItemContainerHeaderItem *firstItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_firstItem");
     [firstItem setTitleText:[firstItem.titleText stringByAppendingString:@"timestamp1"]];
 	SBFluidSwitcherItemContainerHeaderItem *secondItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_secondItem");
