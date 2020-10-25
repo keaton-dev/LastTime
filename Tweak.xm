@@ -42,6 +42,10 @@
 @interface SBFluidSwitcherItemContainerHeaderView : UIView {
 	SBFluidSwitcherItemContainerHeaderItem* _firstItem;
 	SBFluidSwitcherItemContainerHeaderItem* _secondItem;
+    UILabel* _firstTitleLabel;
+	BSUIEmojiLabelView* _firstSubtitleLabelView;
+    UILabel* _secondTitleLabel;
+	BSUIEmojiLabelView* _secondSubtitleLabelView;
 }
 @property (nonatomic,copy) NSArray * headerItems;
 -(id)initWithFrame:(CGRect)arg1;
@@ -50,7 +54,6 @@
 
 %hook SBFluidSwitcherItemContainerHeaderView
 -(id)initWithFrame:(CGRect)arg1 {
-    %orig;
     NSLog(@"lasttime: initWithFrame");
 
 	SBFluidSwitcherItemContainerHeaderItem *firstItem = MSHookIvar<SBFluidSwitcherItemContainerHeaderItem *>(self, "_firstItem");
@@ -62,6 +65,7 @@
     [self setValue:firstItem forKey:@"_firstItem"];
     [self setValue:secondItem forKey:@"_secondItem"];
 
+    %orig;
     return self;
 }
 %end
