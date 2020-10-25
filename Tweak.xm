@@ -33,6 +33,7 @@
 }
 %end
 
+// view responsible for containing app icon and label
 @interface SBFluidSwitcherItemContainerHeaderView : UIView {
 	SBFluidSwitcherIconImageContainerView* _firstIconImageView;
 	UILabel* _firstIconTitle;
