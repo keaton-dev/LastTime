@@ -13,6 +13,19 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
+    - name:  Cache theos dependencies
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-theos-dependencies
+      with:
+        path: |
+          theos
+          /usr/local/Cellar/
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
     - name: Install Dependencies
       run: brew install ldid xz
     - name: Setup Theos
@@ -26,13 +39,6 @@ jobs:
       run: |
         brew install make
         PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
-    - name: Cache theos dependencies
-      uses: actions/cache@v1
-      with:
-        path: theos
-        key: ${{ runner.OS }}-theos-cache-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.OS }}-theos-cache-
     - name: Build Package
       id: build_package
       run: |
