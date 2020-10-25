@@ -43,14 +43,26 @@
 	SBFluidSwitcherIconImageContainerView* _secondIconImageView;
 	UILabel* _secondIconTitle;
 }
+-(id)initWithFrame:(CGRect)arg1 delegate:(id)arg2;
+-(void)_updateIconsAndTitles;
+-(void)layoutSubviews;
 @end
 
 %hook SBFluidSwitcherItemContainerHeaderView
--(void)_createIconAndTitleSubviews {
+-(id)initWithFrame:(CGRect)arg1 delegate:(id)arg2 {
+    %orig;
 	UILabel *firstIconTitle = MSHookIvar<UILabel *>(self, "_firstIconTitle");
     firstIconTitle.text = [firstIconTitle.text stringByAppendingString:@"timestamp1"];
 	UILabel *secondIconTitle = MSHookIvar<UILabel *>(self, "_secondIconTitle");
     secondIconTitle.text = [secondIconTitle.text stringByAppendingString:@"timestamp2"];
+    return self;
+}
+-(void)_createIconAndTitleSubviews {
+    NSLog(@"lasttime: _createIconAndTitleSubviews");
     %orig;
+	UILabel *firstIconTitle = MSHookIvar<UILabel *>(self, "_firstIconTitle");
+    firstIconTitle.text = [firstIconTitle.text stringByAppendingString:@"timestamp1"];
+	UILabel *secondIconTitle = MSHookIvar<UILabel *>(self, "_secondIconTitle");
+    secondIconTitle.text = [secondIconTitle.text stringByAppendingString:@"timestamp2"];
 }
 %end
