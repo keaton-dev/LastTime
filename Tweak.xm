@@ -78,9 +78,9 @@
     [self setValue:secondTitleLabel forKey:@"_secondTitleLabel"];
 
 	BSUIEmojiLabelView *firstSubtitleLabelView = MSHookIvar<BSUIEmojiLabelView *>(self, "_firstSubtitleLabelView");
-    [firstSubtitleLabelView setText:[firstSubtitleLabelView stringByAppendingString:@"timestamp5"]];
+    [firstSubtitleLabelView setText:[firstSubtitleLabelView.text stringByAppendingString:@"timestamp5"]];
 	BSUIEmojiLabelView *secondSubtitleLabelView = MSHookIvar<BSUIEmojiLabelView *>(self, "_secondSubtitleLabelView");
-    [secondSubtitleLabelView setText:[secondSubtitleLabelView stringByAppendingString:@"timestamp6"]];
+    [secondSubtitleLabelView setText:[secondSubtitleLabelView.text stringByAppendingString:@"timestamp6"]];
 
     [self setValue:firstSubtitleLabelView forKey:@"_firstSubtitleLabelView"];
     [self setValue:secondSubtitleLabelView forKey:@"_secondSubtitleLabelView"];
